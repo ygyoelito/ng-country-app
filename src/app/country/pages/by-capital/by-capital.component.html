@@ -1,1 +1,45 @@
-<p>by-capital works!</p>
+<div class="animate__animated animate__fadeIn animate__faster">
+  <div class="row">
+    <div class="col"><h2>By Capital</h2></div>
+    <div class="col d-flex flex-row-reverse align-countrys-center">
+      <i class="bi bi-geo-alt-fill"></i>
+    </div>
+  </div>
+  <hr />
+
+  <div class="row">
+    <div class="col">
+      <app-country-input
+        (onEnter)="search($event)"
+        placeholder="Search by Capital..."
+      ></app-country-input>
+    </div>
+  </div>
+
+  <hr />
+
+  <div *ngIf="hasError" class="alert alert-danger">
+    <div class="d-flex">
+      <div class="flex-grow-1 align-self-center">
+        <i class="bi bi-exclamation-triangle p-2"></i>No results found for the
+        term <b>'{{ term }}'</b>.
+      </div>
+      <div>
+        <button
+          type="button"
+          class="close btn"
+          aria-label="Close"
+          (click)="closeWarn()"
+        >
+          <span aria-hidden="true"><b>&times;</b></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="countries.length > 0" class="row">
+    <div class="col">
+      <app-country-table [countries]="countries"></app-country-table>
+    </div>
+  </div>
+</div>

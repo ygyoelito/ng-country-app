@@ -1,1 +1,59 @@
-<p>country-datails works!</p>
+<div *ngIf="!country; else divCountry" class="alert alert-info">
+  Wait please...
+</div>
+
+<ng-template #divCountry>
+  <div class="row">
+    <div class="col-12">
+      <h1>
+        Country: <small>{{ country.name.common }}</small>
+      </h1>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <h3>Flag</h3>
+      <img [src]="country.flags.png" alt="" class="img-tyhumbnail border border-dark" />
+    </div>
+
+    <div class="col">
+      <h3>Other Information</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>Population:</strong> {{ country.population | number }}
+        </li>
+
+        <li class="list-group-item">
+          <div *ngIf="country.idd.suffixes.length == 1; else onlySuffix">
+            <strong>Code Number Phone: </strong>
+            {{ country.idd.root + country.idd.suffixes }}
+          </div>
+          <ng-template #onlySuffix
+            ><strong>Code Number Phone: </strong> {{ country.idd.root }}</ng-template
+          >
+        </li>
+
+        <li class="list-group-item">
+          <strong>Alphanumeric Number:</strong> {{ country.cioc }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <br />
+  <h3>Translations</h3>
+  <div class="row">
+    <div class="col">
+      <span
+        *ngFor="let lang of languagesResults"
+        class="badge bg-primary mx-1 my-1"
+        >{{ lang }}</span
+      >
+    </div>
+  </div>
+
+  <!-- All info in {{ country | json}} -->
+
+</ng-template>

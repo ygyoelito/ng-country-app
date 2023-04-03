@@ -1,1 +1,49 @@
-<p>by-region works!</p>
+<div class="animate__animated animate__fadeIn animate__faster">
+  <div class="row">
+    <div class="col"><h2>By Region</h2></div>
+    <div class="col d-flex flex-row-reverse align-countrys-center">
+      <i class="bi bi-globe-americas"></i>
+    </div>
+  </div>
+  <hr />
+
+  <div class="row">
+    <div class="col">
+      <!-- (Option 1) [class.btn-primary] = "region === activeRegion" -->
+
+      <!-- (Option 2) [ngClass]="{
+            'btn-primary': activeRegion === region,
+            'btn-outline-primary': activeRegion !== region
+        }" -->
+
+      <!--Option (3)-->
+      <!-- <button
+      *ngFor="let region of regions"
+      [class]="(region === activeRegion) ? 'btn btn-primary' : 'btn btn-outline-primary'"
+      (click)="activateRegion(region)"
+    > -->
+
+      <!--Option (4)-->
+      <button
+        *ngFor="let region of regions"
+        [class]="getClassCSS(region)"
+        (click)="activateRegion(region)"
+      >
+        {{ region | titlecase }}
+      </button>
+    </div>
+  </div>
+  <hr />
+
+  <div *ngIf="!countries; else divCountry" class="alert alert-info">
+    Wait please...
+  </div>
+
+  <ng-template #divCountry>
+    <div *ngIf="countries.length > 0" class="row">
+      <div class="col">
+        <app-country-table [countries]="countries"></app-country-table>
+      </div>
+    </div>
+  </ng-template>
+</div>
